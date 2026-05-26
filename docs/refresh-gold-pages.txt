@@ -1,0 +1,1 @@
+refresh gold pages after switching GitHub Pages source to main/docs
