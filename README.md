@@ -21,4 +21,10 @@ The static production files are generated in `dist/` and can be deployed to GitH
 
 This project includes a GitHub Actions workflow that builds and publishes `dist/` to GitHub Pages on every push to `main`.
 
+Repository Pages URL after deployment:
+
+```txt
+https://drugruiner.github.io/silentgram-landing/
+```
+
 If the repository name changes, update `base` in `vite.config.ts`.
