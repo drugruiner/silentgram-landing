@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, MessageCircle, ShieldCheck, Zap, Bot, MoonStar, LockKeyhole, Smartphone, Globe, Fingerprint } from 'lucide-react';
 
@@ -5,7 +6,7 @@ const cards = [
   ['Приватность по умолчанию', 'Больше контроля над сессиями, уведомлениями и личным пространством.', ShieldCheck],
   ['Быстрый рабочий поток', 'Чистая навигация по чатам и сценарии для работы без перегруза.', Zap],
   ['Умный слой внутри', 'Сводки, быстрые ответы и продуктивные действия там, где они полезны.', Bot],
-];
+] as const;
 
 const features = [
   ['доступно', 'Тихий режим', MoonStar],
@@ -14,17 +15,23 @@ const features = [
   ['доступно', 'Несколько аккаунтов', Smartphone],
   ['скоро', 'Умный перевод', Globe],
   ['доступно', 'Контроль приватности', LockKeyhole],
-];
+] as const;
 
-function Fade({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+const faq = [
+  ['SilentGram — это отдельный мессенджер?', 'Нет, это концепт клиента для Telegram с более премиальным интерфейсом, приватными сценариями и дополнительными удобствами.'],
+  ['Можно ли потом загрузить сайт на VPS?', 'Да. Проект собирается в обычную статическую папку dist и без проблем размещается на VPS через Nginx или Apache.'],
+  ['Можно ли менять тексты и преимущества под клиента?', 'Конечно. Вся структура легко редактируется, поэтому дальше можно спокойно адаптировать сайт под финальное позиционирование.'],
+] as const;
+
+function Fade({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
   return <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.65, delay }}>{children}</motion.div>;
 }
 
-function Badge({ children }: { children: React.ReactNode }) {
+function Badge({ children }: { children: ReactNode }) {
   return <span className="inline-flex rounded-full border border-[#c6a15b]/25 bg-[#c6a15b]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#d8c19a]">{children}</span>;
 }
 
-function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+function Card({ children, className = '' }: { children: ReactNode; className?: string }) {
   return <div className={`rounded-[2rem] border border-[#c6a15b]/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.018))] p-7 shadow-[0_24px_80px_rgba(0,0,0,0.38)] backdrop-blur-xl ${className}`}>{children}</div>;
 }
 
@@ -46,9 +53,9 @@ export default function GoldAppLite() {
       <Fade delay={0.12}><Card className="relative mx-auto max-w-[470px] rounded-[2.7rem] border-[#c6a15b]/16 bg-[#0d0b09]/90 p-4"><div className="rounded-[2.15rem] border border-[#c6a15b]/14 bg-[#100d0a] p-5"><div className="mb-4 flex items-center justify-between"><div><p className="text-xs uppercase tracking-[0.25em] text-[#8e8576]">Интерфейс</p><p className="mt-1 text-lg font-semibold text-[#d7dbe1]">SilentGram UI</p></div><span className="rounded-full border border-[#c6a15b]/20 bg-[#c6a15b]/10 px-3 py-1 text-xs text-[#e8d3af]">active</span></div>{['Тихий режим включён', 'Рабочие аккаунты под контролем', 'Скрытые диалоги защищены', 'Быстрые ответы готовы'].map((item) => <div key={item} className="mb-3 flex items-center justify-between rounded-2xl border border-[#c6a15b]/10 bg-[#17130f] px-4 py-3"><span className="text-sm text-[#efe6d8]">{item}</span><span className="text-[#9c8a70]">›</span></div>)}</div></Card></Fade>
     </section>
 
-    <section id="advantages" className="mx-auto max-w-7xl px-6 py-20 lg:px-8"><Fade><Badge>Почему SilentGram</Badge><h2 className="mt-6 max-w-4xl text-4xl font-semibold tracking-[-0.045em] text-[#d1d5db] sm:text-6xl">Спокойнее. Дороже. Умнее.</h2><p className="mt-5 max-w-2xl text-lg leading-8 text-[#f5efe7]/86">Премиальные плитки, тёплые золотые акценты и выразительные серые заголовки делают сайт статуснее и чище.</p></Fade><div className="mt-12 grid gap-5 lg:grid-cols-3">{cards.map(([title, text, Icon], index) => <Fade key={String(title)} delay={index * 0.08}><Card className="h-full transition hover:-translate-y-1 hover:border-[#c6a15b]/22 hover:bg-[#12100d]"><div className="mb-8 inline-flex rounded-2xl border border-[#c6a15b]/12 bg-[#16120e] p-3"><Icon className="h-7 w-7 text-[#d3b06f]" /></div><h3 className="text-2xl font-semibold text-[#d0d4db]">{title}</h3><p className="mt-4 leading-7 text-[#f4ede3]/82">{text}</p></Card></Fade>)}</div></section>
+    <section id="advantages" className="mx-auto max-w-7xl px-6 py-20 lg:px-8"><Fade><Badge>Почему SilentGram</Badge><h2 className="mt-6 max-w-4xl text-4xl font-semibold tracking-[-0.045em] text-[#d1d5db] sm:text-6xl">Спокойнее. Дороже. Умнее.</h2><p className="mt-5 max-w-2xl text-lg leading-8 text-[#f5efe7]/86">Премиальные плитки, тёплые золотые акценты и выразительные серые заголовки делают сайт статуснее и чище.</p></Fade><div className="mt-12 grid gap-5 lg:grid-cols-3">{cards.map(([title, text, Icon], index) => <Fade key={title} delay={index * 0.08}><Card className="h-full transition hover:-translate-y-1 hover:border-[#c6a15b]/22 hover:bg-[#12100d]"><div className="mb-8 inline-flex rounded-2xl border border-[#c6a15b]/12 bg-[#16120e] p-3"><Icon className="h-7 w-7 text-[#d3b06f]" /></div><h3 className="text-2xl font-semibold text-[#d0d4db]">{title}</h3><p className="mt-4 leading-7 text-[#f4ede3]/82">{text}</p></Card></Fade>)}</div></section>
 
-    <section id="features" className="mx-auto max-w-7xl px-6 py-20 lg:px-8"><Fade><Badge>Возможности</Badge><h2 className="mt-6 max-w-4xl text-4xl font-semibold tracking-[-0.045em] text-[#d1d5db] sm:text-6xl">Красивые плитки и функции, которые хочется показывать.</h2></Fade><div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">{features.map(([status, title, Icon]) => <Card key={String(title)} className="h-full"><div className="mb-7 flex items-center justify-between"><div className="rounded-2xl border border-[#c6a15b]/10 bg-[#16120e] p-3"><Icon className="h-6 w-6 text-[#d3b06f]" /></div><span className="rounded-full border border-[#c6a15b]/25 bg-[#c6a15b]/12 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#e8d3af]">{status}</span></div><h3 className="text-2xl font-semibold text-[#d0d4db]">{title}</h3><p className="mt-4 leading-7 text-[#f4ede3]/82">Аккуратная функция в премиальной золотой плитке без холодных синих оттенков.</p></Card>)}</div></section>
+    <section id="features" className="mx-auto max-w-7xl px-6 py-20 lg:px-8"><Fade><Badge>Возможности</Badge><h2 className="mt-6 max-w-4xl text-4xl font-semibold tracking-[-0.045em] text-[#d1d5db] sm:text-6xl">Красивые плитки и функции, которые хочется показывать.</h2></Fade><div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">{features.map(([status, title, Icon]) => <Card key={title} className="h-full"><div className="mb-7 flex items-center justify-between"><div className="rounded-2xl border border-[#c6a15b]/10 bg-[#16120e] p-3"><Icon className="h-6 w-6 text-[#d3b06f]" /></div><span className="rounded-full border border-[#c6a15b]/25 bg-[#c6a15b]/12 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#e8d3af]">{status}</span></div><h3 className="text-2xl font-semibold text-[#d0d4db]">{title}</h3><p className="mt-4 leading-7 text-[#f4ede3]/82">Аккуратная функция в премиальной золотой плитке без холодных синих оттенков.</p></Card>)}</div></section>
 
     <section id="faq" className="mx-auto max-w-4xl px-6 py-20 lg:px-8"><Fade><Badge>FAQ</Badge><h2 className="mt-6 text-4xl font-semibold tracking-[-0.045em] text-[#d1d5db] sm:text-5xl">Частые вопросы</h2></Fade><div className="mt-10 space-y-4">{faq.map(([q, a]) => <details key={q} className="rounded-[1.8rem] border border-[#c6a15b]/12 bg-[#100d0a]/95 p-6"><summary className="cursor-pointer list-none text-lg font-semibold text-[#d0d4db]">{q}</summary><p className="mt-4 leading-7 text-[#f4ede3]/82">{a}</p></details>)}</div></section>
 
