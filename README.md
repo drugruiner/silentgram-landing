@@ -28,3 +28,7 @@ https://drugruiner.github.io/silentgram-landing/
 ```
 
 If the repository name changes, update `base` in `vite.config.ts`.
+
+## Current stage
+
+Premium Russian redesign.
