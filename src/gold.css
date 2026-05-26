@@ -1,0 +1,14 @@
+:root {
+  color-scheme: dark;
+  background: #060606;
+  color: #f4f1ea;
+}
+
+body {
+  background: #060606;
+}
+
+::selection {
+  background: rgba(208, 171, 102, 0.32);
+  color: #fffaf2;
+}
